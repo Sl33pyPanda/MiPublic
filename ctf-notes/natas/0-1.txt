@@ -1,0 +1,36 @@
+<!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto -->
+<!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi -->
+
+/files/users.txt => natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+
+robots.txt => /s3cr3t/users.txt  => natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+
+firefiox header edit and resend 
+Access granted. The password for natas5 is iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+
+storage inspector -> cookie manage > editt => Access granted. The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+
+go to file .ice showed in source and get the secret => Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+
+read the hint > paste to parameter => DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe  
+
+go to php online -> reverse the seccret > oubWYf2kBq > W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+
+passthru vunerable -> command injection -> path travel / grep travel -> path exp from natas7 -> /etc/natas_webpass/natas10:nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+
+same as above -> grep travel + bruteforce -> /etc/natas_webpass/natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK 
+
+$tempdata is plaintext -> reverse XOR knowplaintext to get the key => encrypt new cookie =>  The password for natas12 is EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+#tip javacript : document.cookie="data=XXXXXXX"
+
+hidden filename -> function makeRandomPathFromFilename -> rename to php to execute php code => /etc/natas_webpass/natas13:jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+
+file signature => Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1 
+
+simple sqlinjection => AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+
+python bruteforce code at Shared\ctf\natas =>  { "level": "natas16", "pass": "WaIHEacj63wnNIBROHeqi3p9t0m5nhmh" 
+
+python bruteforce command injection code at ctf\natas => natas17:8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
+
+python bruteforce blind sql injection code at ctf\natas => xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP (Nhiều lỗi connect vcl)
