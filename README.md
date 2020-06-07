@@ -23,3 +23,8 @@ simple-spammer
 
 - simple beacon-spam for ESP8266
 
+Arduino-controller 
+
+- Using a arduino (pro micro - atmelmega32u4) as a controller
+- code python to translate signal from a real controller to do some stuff :>
+
