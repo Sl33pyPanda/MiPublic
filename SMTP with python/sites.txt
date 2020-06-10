@@ -1,1 +1,1 @@
-this wil be send by smtp pyhton 
+this wil be send by smtp pyhton â con bò 
