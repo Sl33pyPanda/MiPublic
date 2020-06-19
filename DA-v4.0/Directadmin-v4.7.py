@@ -1,19 +1,21 @@
 # made by ThanhNguyen
-print("Initial may take times")
-import os
+import os ,subprocess
+from colors import paint, warn
+print(paint("Start initialize sequence",'f_green'),end='')
 import requests, base64
 import time, concurrent.futures, getpass
 import re
-from datetime import *
+from datetime import datetime
 from checker import Checker
 from ssh import sshSession
 from logger import log
-from colors import paint, warn
+
+
 
 
 usr = ''
 pas = ''
-Policy= paint("Only Ips in whitelist are allowed to login", 'f_purple', True)
+
 PatchNote = ("-" +
 paint("---------UPDATE NOTE Ver4.0\n","f_green")+
 paint("Ver 4.0\n","f_cyan")+
@@ -42,15 +44,12 @@ paint("    + Fix input func\n","f_green",True)+
 paint("Ver 4.6\n","f_cyan")+
 paint("    + Recode the mailqueue log check\n","f_yellow",True)+
 paint("    + Fix 3 mailqueue bug\n","f_green",True)+
-paint("    + Fix ASN migrate problem\n","f_green",True)
+paint("    + Fix ASN migrate problem\n","f_green",True)+
+paint("Ver 4.7\n","f_cyan")+
+paint("    + Add more mail log\n","f_green",True)+
+paint("    + Add cpa to sites\n","f_green",True)+
+paint("    + Some change in UI\n","f_green",True)
              )
-# list of sites 
-sites = ['https://example:port/'  
-         ]
-# list of logged sites 
-logged = {'https://example:port/'         :False,  # 0
-         }
-
 actions = {'login': 'CMD_LOGIN',
            'tickets': 'CMD_TICKET',
            'users': 'CMD_ALL_USER_SHOW',
@@ -62,15 +61,6 @@ actions = {'login': 'CMD_LOGIN',
            'customBuild': 'CMD_PLUGINS_ADMIN/custombuild/index.html',
            'license': 'CMD_LICENSE'
            }
-
-
-
-
-
-
-
-
-
 
 def signin():
     global usr, pas
@@ -134,7 +124,7 @@ def menuInput(menu):
 def trimSite(site):
     host = site.replace('https://', '')
     host = host.replace('http://', '')
-    host = host.replace(':{port}/', '')
+    host = host.replace(':2222/', '')
     return host
 
 
@@ -223,6 +213,8 @@ def printUsers(site):
 def mailQueue(site):
     # #No - not updated error code 
     loopError = {"#01": "OverQuotaTemp",
+                 "#02" : "overquota",
+                 "#03" : "temporarily blocked due to spam",
                  "(-44)": "451 Internal resource temporarily unavailable",
                  "(-46)": "454 Transient reject by behaviour spam",
                  "(110)": "Connection timed out",
@@ -280,50 +272,7 @@ def mailQueue(site):
                     if mailList != "" and '@' not in loop[er]:
                         loop[er] = mailList[:-2]
                     print(paint("{} {} ({})".format(er,loopError[er],loop[er])  ,'f_yellow'))
-
-            
-            """
-            for er in list(loopError.keys()):
-                for i in tArray:
-                    sucess = False
-                    if 'Received' in i or 'transport succeeded' in i or i == "":
-                        sucess = True
-                    elif er not in loop:
-                        if er in i :
-                            loop.append(er)                            
-                            ex = er + ' ' + loopError[er] 
-                        elif loopError[er] in i:
-                            loop.append(er)
-                            ex = er + ' ' + loopError[er] 
-                    elif er not in i and loopError[er] not in i and i not in unknow:
-                        confirm = True
-                        for error in list(loopError.keys()):
-                            if error in i or loopError[error] in i:
-                                confirm = False
-                        if confirm:
-                            unknow.append(i)
-                            line = paint('#Unknow log line : ', 'f_red') + paint(i, 'f_yellow')
-                            print(line)                        
-                            log('Unknow log : ' + i, func , site , 'checking log line')
-                    else:
-                        pass                
-                    if not sucess:
-                        mail = str(i.split(" ")[0])
-                        if '@' in mail and mail not in mailList:
-                            mailList.append(mail)
-            try:
-                t = ""
-                for mail in mailList:
-                    if len(mailList) == 1:
-                        t = mail
-                    else:
-                        t += mail+', '
-                t= '('+t[:-2]+')'
-                print(paint(ex + '  ' + t ,'f_yellow'))
-            except Exception as e :
-                log(e, func, site)
-            """
-                   
+  
 
 def printStats(site):
     r = br.get(site + actions['stats'] + '?json=yes', headers=mkHeader(site))
@@ -396,14 +345,15 @@ def updateLicense(site):
 
 
 def checkSpam():
-    checker = Checker()
-    result = checker.run()
-    print(result)
+    try:
+        checker = Checker()
+        result = checker.run()
+        print(result)
+    except Exception :
+        pass
 
 
 def checkBackups(site):
-    commands = ['cd /home/admin/admin_backups',
-                'sudo ls -la']
     session = sshSession(trimSite(site), 22, usr, pas)
     session.getShell()
     backups = session.checkBackups()
@@ -417,19 +367,22 @@ def option():
     choice = menuInput("=== OPTION ===\n"+
                        "1.Re-enter credential\n" +
                        "2.Mark as read all tickets\n" +
+                       "3.Mark as read all tickets\n" +
                        "Choice : ")
     if choice == "1":
         cre2 = signin()
         for site in sites:
-            print("- - - - - - - " + paint(site, 'f_purple', True) + " - - - - - - - - -")
+            print("- - - {:<50}  :  ".format(paint(site, 'f_purple', True)) ,end ='')
             login(site)
     if choice == "2":
         for site in sites:
             print("- - - - - - - " + paint(site, 'f_purple', True) + " - - - - - - - - -")
             seenTickets(site)
+    if choice == "3":
+        print(PatchNote)
 
 def policyCheck():
-    whitelist = base64.b64decode(b'MTE1Ljc1LjE5MS40NCAxODIuMjQ4LjI0My4yMTE=').decode()
+    whitelist = base64.b64decode(b'MTE1Ljc1LjE5MS40NA==').decode()
     ip = br.get("http://ifconfig.me/ip").text
     if ip in whitelist:
         return True
@@ -443,7 +396,7 @@ def main():
     cre2 = signin()
     func = login
     for site in sites:
-        print("- - - - - - - " + paint(site, 'f_purple', True) + " - - - - - - - - -")
+        print("- - - {:<50}  :  ".format(paint(site, 'f_purple', True)) ,end ='')
         login(site)
 
     switcher = {"1": printTickets,
@@ -477,6 +430,9 @@ def main():
             option()
         elif choice == "8":
             checkSpam()
+        elif choice == "10":
+            print("- - - {:<50}  :  ".format(paint(site, 'f_purple', True)) ,end ='')
+            login(site)
         else:
             func = switcher.get(choice, "Invalid Choice")
             for site in sites:
@@ -491,15 +447,40 @@ def main():
 # END of main func ---------------------------------------------------------------------------------------
 def uselessFunc():
     pass
+
 br = requests.Session()
 func = uselessFunc
 cre2=""
-print(Policy)
-print(paint("-"*60, 'b_yellow', True))
-print(PatchNote)
+canRun = True
+print(paint("Load instance ",'f_green'),end='')
+try :
+    tmpsites = br.get("https://sl33pypanda.github.io/mi1stRepo/DA-dera/sites.txt").text
+    print(paint(" .",'f_green'),end='')
+    s = base64.b64decode(tmpsites.encode()).decode()
+    print(paint(" .",'f_green'),end='')
+    sites = s.split('\n')
+    logged = dict()
+    for i in sites:
+        logged[i]=False
+    print(paint(" . ",'f_green'))    
+except Exception :
+    print(paint(" Failed ",'f_red'))
+    canRun = False
 
-
+print(paint("Policy checking . . .",'f_yellow',True), end ='')
+policy = policyCheck()
+print(paint(str(policy),'f_green') if policy else paint(str(policy),'f_red'))
+if not policy :
+    canRun = False
     
+print('')
+
+if not canRun:
+    print(paint("You not met the requirement to run this program.",'f_red'))
+    print(paint("Quitting . .",'f_red'))
+    time.sleep(2)
+    os._exit(-1)
+
 try:
     debug = False
     if debug:
@@ -508,14 +489,8 @@ try:
         pas=''
         cre2='referer=%2F&username={}&password={}&json=yes'.format(usr, pas)
         site = sites[10]
-        if not policyCheck():
-                main()
-        else:
-                print(paint("Your ip is not allowed to use this program", 'f_red', True))
+        main()                
     else :
-        if policyCheck():
-            main()
-        else:
-            print(paint("Your ip is not allowed to use this program", 'f_red', True))
+        main()
 except Exception as e:
     log(e, func, "--frame--")
