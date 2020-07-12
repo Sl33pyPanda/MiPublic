@@ -89,8 +89,8 @@ def openCon():
     con = 10
     while type(con) is int and con > 1:
         try:
-            con = serial.Serial( "COM" + str(input("COM port : ")), 19200)
-            print('baun : 19200')
+            con = serial.Serial( "COM" + str(input("COM port : ")), 115200)
+            print('baun : 115200')
             return con
         except Exception as e:
             printTrace('openCon',e)
