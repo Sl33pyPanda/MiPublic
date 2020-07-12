@@ -4,7 +4,7 @@ char receivedChars[numChars];   // an array to store the received data
 
 void setup() {
   pinMode( 13 , OUTPUT );
-  Serial.begin(38400);
+  Serial.begin(115200);
   Serial.println("<Controller is ready>");
 }
 
