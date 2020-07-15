@@ -1,0 +1,15 @@
+# README
+
+- [ HOD401/HOD401-Lab1-Proj2-NguyenCongThanh-SE130443-IA1301.docx](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/HOD401-Lab1-Proj2-NguyenCongThanh-SE130443-IA1301.docx)
+- [ HOD401/HOD401-Lab2-Module02-1359-NguyenCongThanh-SE130443.docx](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/HOD401-Lab2-Module02-1359-NguyenCongThanh-SE130443.docx)
+- [ HOD401/HOD401-Lab3-Module03-1234-NguyenCongThanh-SE130443.docx](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/HOD401-Lab3-Module03-1234-NguyenCongThanh-SE130443.docx)
+- [ HOD401/HOD401-Lab4-Mudule04-234567-NguyenCongThanh.docx](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/HOD401-Lab4-Mudule04-234567-NguyenCongThanh.docx)
+- [ HOD401/HOD401-Lab5-Proj5-Nguyen Cong Thanh-SE130443-IA1301.docx](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/HOD401-Lab5-Proj5-Nguyen Cong Thanh-SE130443-IA1301.docx)
+- [ HOD401/LAB 9 Exploiting Samba, Obtain Hashes, John the Ripper.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/LAB 9  Exploiting Samba, Obtain Hashes, John the Ripper.html)
+- [ HOD401/Lab 10 Android mobi.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab 10 Android mobi.html)
+- [ HOD401/Lab 11 - Module 11.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab 11 - Module 11.html)
+- [ HOD401/Lab 13 - Module 12 Hacking web application.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab 13 - Module 12 Hacking web application.html)
+- [ HOD401/Lab 14 Crack wifi passphrase.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab 14  Crack wifi passphrase.html)
+- [ HOD401/Lab 8 - Module 5 - System Hacking.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab 8 - Module 5 - System Hacking.html)
+- [ HOD401/Lab6-HOD401-Proj3.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab6-HOD401-Proj3.html)
+- [ HOD401/Lab7-HOD401-Proj9.html](https://github.com/Sl33pyPanda/MiPublic/blob/master/HOD401/Lab7-HOD401-Proj9.html)
