@@ -1,3 +1,5 @@
+#include <ArduinoJson.h>
+
 #include "Settings.h"
 
 Settings::Settings() {
