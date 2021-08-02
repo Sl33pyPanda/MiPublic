@@ -1,2 +1,12 @@
 
-lol-botsinhnhat/__pycache__/test.cpython-37.pyc
+lol-botsinhnhat/__pycache__/
+lol-botsinhnhat/build/
+lol-botsinhnhat/dist/
+lol-botsinhnhat/code/ngrok.exe
+lol-botsinhnhat/Scrapped_FB.csv
+lol-botsinhnhat/test.spec
+.csv
+.data
+.spec
+.exe
+
