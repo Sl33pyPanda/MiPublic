@@ -36,7 +36,7 @@ post_urls = [#"https://www.facebook.com/LienMinhHuyenThoai/posts/438742890467465
              #"https://www.facebook.com/LienMinhHuyenThoai/posts/4396117707139109",
              #"https://www.facebook.com/LienMinhHuyenThoai/posts/4395218007229079"
                           ]
-#credentials=("Tpan.ngok", "Talamanykaka1P@55w0rd"),
+
 for post in get_posts(post_urls, options = options):
     dataframe = post
     df = pd.DataFrame.from_dict(dataframe, orient='index')
