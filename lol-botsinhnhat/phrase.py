@@ -47,11 +47,12 @@ LOL8JN5H9WZJ3 LOLRCT744KTSG LOLW3HQNKFFFM LOL5GKGNSPVWM LOL78CSB35VPN LOL95TX6UN
 """
 b = """vietnguyendepasssssssssssss"""
 c = ''
-#c = requests.get("https://gist.githubusercontent.com/nguy3n47/e888a1a066ee4c68afbc84f49d97e65c/raw/de432e8a23b75a2323d1648dd0f3c2cd71f5b6a6/birthday_code_league_of_legends.txt").text
-
+c = requests.get("https://gist.githubusercontent.com/nguy3n47/e888a1a066ee4c68afbc84f49d97e65c/raw/de432e8a23b75a2323d1648dd0f3c2cd71f5b6a6/birthday_code_league_of_legends.txt").text
+d=""
+#d = requests.get("https://raw.githubusercontent.com/t-rekttt/lolsn/main/lolcode.txt").text
 
 f = open(r'./code/code', 'w')
-codes = sorted(list(set(re.findall("LOL[A-Z0-9]{10}",a+c))))
+codes = sorted(list(set(re.findall("LOL[A-Z0-9]{10}",a+c+d))))
 print(len(codes))
 for i in codes:
     f.write(i+'\n')

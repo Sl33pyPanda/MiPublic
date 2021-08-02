@@ -38,7 +38,7 @@ def code_enter(code):
 def main():
     global xok,yok,xnhap,ynhap,ok
     global ok,btn1,btn2
-
+    #trying some fun stuff
     pwd = input("Nhap password : ")
 
 
